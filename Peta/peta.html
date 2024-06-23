@@ -26,6 +26,7 @@
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -46,6 +47,7 @@
         <script src="data/pointzona5737pohon_12.js"></script>
         <script src="data/pointzona63925pohon_13.js"></script>
         <script src="data/jalan_20.js"></script>
+        <script src="data/Gazebo_21.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
@@ -112,6 +114,9 @@
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
             var popup = layer.getPopup();
@@ -153,6 +158,9 @@
             var popupContent = '<table>\
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -196,6 +204,9 @@
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
             var popup = layer.getPopup();
@@ -237,6 +248,9 @@
             var popupContent = '<table>\
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -280,6 +294,9 @@
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
                     </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
             var popup = layer.getPopup();
@@ -321,6 +338,9 @@
             var popupContent = '<table>\
                     <tr>\
                         <td class="visible-with-data" id="Luas (m2)"colspan="2"><strong>Luas (m2)</strong><br />' + (feature.properties['Luas (m2)'] !== null ? autolinker.link(feature.properties['Luas (m2)'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Wilayah"colspan="2"><strong>Wilayah</strong><br />' + (feature.properties['Wilayah'] !== null ? autolinker.link(feature.properties['Wilayah'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -710,9 +730,6 @@
         function pop_jalan_20(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['jalan'] !== null ? autolinker.link(feature.properties['jalan'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
@@ -733,7 +750,7 @@
                 lineJoin: 'bevel',
                 weight: 4.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_jalan_20');
@@ -741,7 +758,7 @@
         map.getPane('pane_jalan_20').style['mix-blend-mode'] = 'normal';
         var layer_jalan_20 = new L.geoJson(json_jalan_20, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_jalan_20',
             layerName: 'layer_jalan_20',
             pane: 'pane_jalan_20',
@@ -750,8 +767,60 @@
         });
         bounds_group.addLayer(layer_jalan_20);
         map.addLayer(layer_jalan_20);
+        function pop_Gazebo_21(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td class="visible-with-data" id="Bangunan"colspan="2"><strong>Bangunan</strong><br />' + (feature.properties['Bangunan'] !== null ? autolinker.link(feature.properties['Bangunan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+            var popup = layer.getPopup();
+            var content = popup.getContent();
+            var updatedContent = removeEmptyRowsFromPopupContent(content, feature);
+            popup.setContent(updatedContent);
+        }
+
+        function style_Gazebo_21_0() {
+            return {
+                pane: 'pane_Gazebo_21',
+                shape: 'square',
+                radius: 5.9999999999999964,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,180,60,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Gazebo_21');
+        map.getPane('pane_Gazebo_21').style.zIndex = 421;
+        map.getPane('pane_Gazebo_21').style['mix-blend-mode'] = 'normal';
+        var layer_Gazebo_21 = new L.geoJson(json_Gazebo_21, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Gazebo_21',
+            layerName: 'layer_Gazebo_21',
+            pane: 'pane_Gazebo_21',
+            onEachFeature: pop_Gazebo_21,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Gazebo_21_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Gazebo_21);
+        map.addLayer(layer_Gazebo_21);
         var baseMaps = {};
         var overlaysTree = [
+        {label: '<b>Bangunan</b>', selectAllCheckbox: true, children: [
+            {label: '<img src="legend/Gazebo_21.png" /> Gazebo', layer: layer_Gazebo_21},]},
         {label: '<b>Akses Jalan</b>', selectAllCheckbox: true, children: [
             {label: '<img src="legend/jalan_20.png" /> jalan', layer: layer_jalan_20},]},
         {label: '<b>Kerapatan Pohon Mangrove</b>', selectAllCheckbox: true, children: [
